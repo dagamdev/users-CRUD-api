@@ -1,0 +1,260 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Users api 1.0",
+    "description": "Api de usuarios opcional para el proyecto front-end de React [users CRUD](https://dg-crud-users.netlify.app/)",
+    "contact": {
+      "email": "gacub20ru@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://users-crud-api.onrender.com/api/v1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "users",
+      "description": "Metodos para los usuarios"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get all users",
+        "description": "Obten un areglo con todos los usuarios.",
+        "operationId": "getAllUsers",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Create user",
+        "description": "Crea un usuario",
+        "requestBody": {
+          "description": "Crea un nuevo usuario",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get user by id",
+        "description": "Obten un usuario por su id",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "Id del usuario a eliminar",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "users"
+        ],
+        "summary": "User update",
+        "description": "Actualiza un usuario por su id",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "Id del usuario a eliminar",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "users"
+        ],
+        "summary": "User delete",
+        "description": "Elimina a un usuario por su id",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "Id del usuario a eliminar",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Delete"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "35e15f49-44c5-431b-ac70-083b26b83fb0"
+          },
+          "firstName": {
+            "type": "string",
+            "example": "Jhon"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Mircha"
+          },
+          "email": {
+            "type": "string",
+            "example": "jhon@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "root"
+          }
+        }
+      },
+      "UserBody": {
+        "required": [
+          "name",
+          "photoUrls"
+        ],
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "example": "Jhon"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Mircha"
+          },
+          "email": {
+            "type": "string",
+            "example": "jhon@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "root"
+          }
+        }
+      },
+      "Delete": {
+        "type": "number"
+      }
+    }
+  }
+}

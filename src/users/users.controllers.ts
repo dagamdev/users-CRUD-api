@@ -2,14 +2,24 @@ import { Users } from "../models/users.model";
 import { v4 } from "uuid"
 import { UserData } from "../utils/types";
 
-const getAllUsers = () => Users.findAll({where: {status: 'active'}})
+const getAllUsers = () => Users.findAll({
+  where: {status: 'active'},
+  attributes: {
+    exclude: ['status', 'createdAt', 'updatedAt']
+  }
+})
 
 const createUser = (data: UserData) => Users.create({
   id: v4(),
   ...data
 })
 
-const getUserById = (id: string) => Users.findOne({where: {id, status: 'active'}})
+const getUserById = (id: string) => Users.findOne({
+  where: {id, status: 'active'},
+  attributes: {
+    exclude: ['status', 'createdAt', 'updatedAt']
+  }
+})
 
 const updateUser = (id: string, data: UserData) => Users.update(data, {where: {id, status: 'active'}})
 

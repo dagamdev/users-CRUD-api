@@ -9,6 +9,7 @@ export const envConfig = {
   port: PV.PORT || 2468,
   nodeEnv: PV.NODE_ENV || 'development',
   host: PV.HOST,
+  domain: PV.DOMAIN,
   db: {
     dbHost: PV.DB_HOST || 'localhost',
     userName: PV.DB_USER || 'postgres',
